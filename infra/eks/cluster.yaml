@@ -1,0 +1,29 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eduapply-cluster
+  region: ap-southeast-2   # Sydney — change if needed
+  version: "1.29"
+
+# Managed node group
+managedNodeGroups:
+  - name: eduapply-nodes
+    instanceType: t3.medium
+    minSize: 1
+    maxSize: 3
+    desiredCapacity: 2
+    amiFamily: AmazonLinux2
+    labels:
+      app: eduapply
+    tags:
+      Project: EduApply
+      Environment: demo
+
+# Enable CloudWatch logging
+cloudWatch:
+  clusterLogging:
+    enableTypes:
+      - api
+      - audit
+      - authenticator

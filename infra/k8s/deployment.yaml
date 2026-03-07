@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eduapply
+  namespace: default
+  labels:
+    app: eduapply
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: eduapply
+  template:
+    metadata:
+      labels:
+        app: eduapply
+    spec:
+      containers:
+        - name: eduapply
+          image: IMAGE_PLACEHOLDER   # replaced by GitHub Actions
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
