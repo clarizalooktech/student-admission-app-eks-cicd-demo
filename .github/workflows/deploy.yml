@@ -8,8 +8,8 @@ on:
 
 env:
   AWS_REGION: ap-southeast-2
-  ECR_REPOSITORY: eduapply
-  EKS_CLUSTER_NAME: eduapply-cluster
+  ECR_REPOSITORY: student-admission-app-eks
+  EKS_CLUSTER_NAME: student-admission-app-cluster
 
 jobs:
   build-and-deploy:
