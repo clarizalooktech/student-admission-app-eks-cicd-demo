@@ -1,4 +1,4 @@
-# EduApply — Student Admissions App
+# Student Admissions App
 > Deployed on **Amazon EKS** via **GitHub Actions** CI/CD pipeline
 
 ---
