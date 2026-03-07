@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: eduapply-service
+  name: student-admission-app-service
   namespace: default
   labels:
-    app: eduapply
+    app: student-admission-app
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: "external"
     service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
 spec:
   type: LoadBalancer
   selector:
-    app: eduapply
+    app: student-admission-app
   ports:
     - name: http
       protocol: TCP

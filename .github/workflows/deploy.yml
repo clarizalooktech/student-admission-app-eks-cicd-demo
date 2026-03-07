@@ -3,12 +3,12 @@ name: Build and Deploy to EKS
 on:
   push:
     branches:
-      - feature/deploy-k8
+      - main
   workflow_dispatch:   # allows manual trigger from GitHub UI
 
 env:
   AWS_REGION: ap-southeast-2
-  ECR_REPOSITORY: student-admission-app-eks
+  ECR_REPOSITORY: student-admission-app
   EKS_CLUSTER_NAME: student-admission-app-cluster
 
 jobs:
@@ -73,14 +73,14 @@ jobs:
           kubectl apply -f infra/k8s/service.yaml
 
           # Wait for rollout to complete
-          kubectl rollout status deployment/eduapply --timeout=120s
+          kubectl rollout status deployment/student-admission-app --timeout=120s
 
       # ── 7. Print app URL ──────────────────────────────────────────
       - name: Get Load Balancer URL
         run: |
           echo "Waiting for LoadBalancer external IP..."
           sleep 20
-          kubectl get service eduapply-service \
+          kubectl get service student-admission-app-service \
             -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
           echo ""
           echo "App is live at the URL above!"

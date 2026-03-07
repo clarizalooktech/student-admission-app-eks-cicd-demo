@@ -6,7 +6,7 @@
 ## Repo Structure
 
 ```
-eduapply/
+student-admission-app/
 ├── app/
 │   ├── index.html          # Frontend (single-page admission form)
 │   ├── Dockerfile          # Containerises the app with nginx
@@ -43,7 +43,7 @@ eduapply/
 
 ### 1. Create ECR Repository
 ```bash
-aws ecr create-repository --repository-name eduapply --region ap-southeast-2
+aws ecr create-repository --repository-name student-admission-app --region ap-southeast-2
 ```
 
 ### 2. Provision EKS Cluster (~15 min)
@@ -81,7 +81,7 @@ You can also trigger manually via **Actions → Run workflow**.
 ## Tear Down (after presentation)
 ```bash
 # Delete EKS cluster — stops all billing
-eksctl delete cluster --name eduapply-cluster --region ap-southeast-2
+eksctl delete cluster --name student-admission-app-cluster --region ap-southeast-2
 ```
 
 **Estimated cost for 24 hours: ~$5** ☕
