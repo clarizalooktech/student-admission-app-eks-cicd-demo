@@ -3,7 +3,7 @@ name: Build and Deploy to EKS
 on:
   push:
     branches:
-      - main
+      - feature/deploy-k8
   workflow_dispatch:   # allows manual trigger from GitHub UI
 
 env:
