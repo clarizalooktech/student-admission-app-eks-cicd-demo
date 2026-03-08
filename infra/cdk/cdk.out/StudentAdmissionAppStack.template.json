@@ -1,0 +1,1314 @@
+{
+ "Description": "Student Admission App — VPC, EKS, and ECR infrastructure",
+ "Resources": {
+  "StudentAdmissionVpc4922FA93": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "student-admission-app-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/Resource"
+   }
+  },
+  "StudentAdmissionVpcPublicSubnet1Subnet647AAB75": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "ap-southeast-2a",
+    "CidrBlock": "10.0.0.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StudentAdmissionVpc4922FA93"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1/Subnet"
+   }
+  },
+  "StudentAdmissionVpcPublicSubnet1RouteTable29C91CF3": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StudentAdmissionVpc4922FA93"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "StudentAdmissionVpcPublicSubnet1RouteTableAssociation4B85B224": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "StudentAdmissionVpcPublicSubnet1RouteTable29C91CF3"
+    },
+    "SubnetId": {
+     "Ref": "StudentAdmissionVpcPublicSubnet1Subnet647AAB75"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "StudentAdmissionVpcPublicSubnet1DefaultRouteD662FC53": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "StudentAdmissionVpcIGW2BDFF927"
+    },
+    "RouteTableId": {
+     "Ref": "StudentAdmissionVpcPublicSubnet1RouteTable29C91CF3"
+    }
+   },
+   "DependsOn": [
+    "StudentAdmissionVpcVPCGW37ECA50F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "StudentAdmissionVpcPublicSubnet1EIPA4CB2D00": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1/EIP"
+   }
+  },
+  "StudentAdmissionVpcPublicSubnet1NATGatewayC8662CC5": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "StudentAdmissionVpcPublicSubnet1EIPA4CB2D00",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "StudentAdmissionVpcPublicSubnet1Subnet647AAB75"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "StudentAdmissionVpcPublicSubnet1DefaultRouteD662FC53",
+    "StudentAdmissionVpcPublicSubnet1RouteTableAssociation4B85B224"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1/NATGateway"
+   }
+  },
+  "StudentAdmissionVpcPublicSubnet2Subnet7669F2EB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "ap-southeast-2b",
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StudentAdmissionVpc4922FA93"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet2/Subnet"
+   }
+  },
+  "StudentAdmissionVpcPublicSubnet2RouteTable2DB92FF2": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StudentAdmissionVpc4922FA93"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet2/RouteTable"
+   }
+  },
+  "StudentAdmissionVpcPublicSubnet2RouteTableAssociation5004C34D": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "StudentAdmissionVpcPublicSubnet2RouteTable2DB92FF2"
+    },
+    "SubnetId": {
+     "Ref": "StudentAdmissionVpcPublicSubnet2Subnet7669F2EB"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "StudentAdmissionVpcPublicSubnet2DefaultRouteDA184511": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "StudentAdmissionVpcIGW2BDFF927"
+    },
+    "RouteTableId": {
+     "Ref": "StudentAdmissionVpcPublicSubnet2RouteTable2DB92FF2"
+    }
+   },
+   "DependsOn": [
+    "StudentAdmissionVpcVPCGW37ECA50F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "StudentAdmissionVpcPrivateSubnet1Subnet097E90C6": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "ap-southeast-2a",
+    "CidrBlock": "10.0.2.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StudentAdmissionVpc4922FA93"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet1/Subnet"
+   }
+  },
+  "StudentAdmissionVpcPrivateSubnet1RouteTable4DBBFAE3": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StudentAdmissionVpc4922FA93"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet1/RouteTable"
+   }
+  },
+  "StudentAdmissionVpcPrivateSubnet1RouteTableAssociation8A134C15": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "StudentAdmissionVpcPrivateSubnet1RouteTable4DBBFAE3"
+    },
+    "SubnetId": {
+     "Ref": "StudentAdmissionVpcPrivateSubnet1Subnet097E90C6"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "StudentAdmissionVpcPrivateSubnet1DefaultRouteE07A872B": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "StudentAdmissionVpcPublicSubnet1NATGatewayC8662CC5"
+    },
+    "RouteTableId": {
+     "Ref": "StudentAdmissionVpcPrivateSubnet1RouteTable4DBBFAE3"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "StudentAdmissionVpcPrivateSubnet2Subnet2B8C7D36": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "ap-southeast-2b",
+    "CidrBlock": "10.0.3.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StudentAdmissionVpc4922FA93"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet2/Subnet"
+   }
+  },
+  "StudentAdmissionVpcPrivateSubnet2RouteTableF8BA913F": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StudentAdmissionVpc4922FA93"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet2/RouteTable"
+   }
+  },
+  "StudentAdmissionVpcPrivateSubnet2RouteTableAssociation373436E1": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "StudentAdmissionVpcPrivateSubnet2RouteTableF8BA913F"
+    },
+    "SubnetId": {
+     "Ref": "StudentAdmissionVpcPrivateSubnet2Subnet2B8C7D36"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "StudentAdmissionVpcPrivateSubnet2DefaultRoute15485B9C": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "StudentAdmissionVpcPublicSubnet1NATGatewayC8662CC5"
+    },
+    "RouteTableId": {
+     "Ref": "StudentAdmissionVpcPrivateSubnet2RouteTableF8BA913F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "StudentAdmissionVpcIGW2BDFF927": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "student-admission-app-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/IGW"
+   }
+  },
+  "StudentAdmissionVpcVPCGW37ECA50F": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "StudentAdmissionVpcIGW2BDFF927"
+    },
+    "VpcId": {
+     "Ref": "StudentAdmissionVpc4922FA93"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionVpc/VPCGW"
+   }
+  },
+  "StudentAdmissionEcr67053003": {
+   "Type": "AWS::ECR::Repository",
+   "Properties": {
+    "EmptyOnDelete": true,
+    "LifecyclePolicy": {
+     "LifecyclePolicyText": "{\"rules\":[{\"rulePriority\":1,\"description\":\"Keep last 10 images\",\"selection\":{\"tagStatus\":\"any\",\"countType\":\"imageCountMoreThan\",\"countNumber\":10},\"action\":{\"type\":\"expire\"}}]}"
+    },
+    "RepositoryName": "student-admission-app"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionEcr/Resource"
+   }
+  },
+  "EksClusterRole30336171": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "eks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSClusterPolicy"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/EksClusterRole/Resource"
+   }
+  },
+  "StudentAdmissionClusterKubectlHandlerRoleA5565D1A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     },
+     {
+      "Fn::If": [
+       "StudentAdmissionClusterHasEcrPublic2F5E821B",
+       {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly"
+         ]
+        ]
+       },
+       {
+        "Ref": "AWS::NoValue"
+       }
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/KubectlHandlerRole/Resource"
+   }
+  },
+  "StudentAdmissionClusterKubectlHandlerRoleDefaultPolicy21813772": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "eks:DescribeCluster",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "StudentAdmissionClusterAF47D13E",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "StudentAdmissionClusterCreationRoleE162DA91",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "StudentAdmissionClusterKubectlHandlerRoleDefaultPolicy21813772",
+    "Roles": [
+     {
+      "Ref": "StudentAdmissionClusterKubectlHandlerRoleA5565D1A"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/KubectlHandlerRole/DefaultPolicy/Resource"
+   }
+  },
+  "StudentAdmissionClusterControlPlaneSecurityGroupA2134548": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "EKS Control Plane Security Group",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "StudentAdmissionVpc4922FA93"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/ControlPlaneSecurityGroup/Resource"
+   }
+  },
+  "StudentAdmissionClusterCreationRoleE162DA91": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+          "Outputs.StudentAdmissionAppStackawscdkawseksClusterResourceProviderOnEventHandlerServiceRoleCB08332DArn"
+         ]
+        }
+       }
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+          "Outputs.StudentAdmissionAppStackawscdkawseksClusterResourceProviderIsCompleteHandlerServiceRole98374A70Arn"
+         ]
+        }
+       }
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "StudentAdmissionClusterKubectlHandlerRoleA5565D1A",
+          "Arn"
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "DependsOn": [
+    "StudentAdmissionVpcIGW2BDFF927",
+    "StudentAdmissionVpcPrivateSubnet1DefaultRouteE07A872B",
+    "StudentAdmissionVpcPrivateSubnet1RouteTable4DBBFAE3",
+    "StudentAdmissionVpcPrivateSubnet1RouteTableAssociation8A134C15",
+    "StudentAdmissionVpcPrivateSubnet1Subnet097E90C6",
+    "StudentAdmissionVpcPrivateSubnet2DefaultRoute15485B9C",
+    "StudentAdmissionVpcPrivateSubnet2RouteTableF8BA913F",
+    "StudentAdmissionVpcPrivateSubnet2RouteTableAssociation373436E1",
+    "StudentAdmissionVpcPrivateSubnet2Subnet2B8C7D36",
+    "StudentAdmissionVpcPublicSubnet1DefaultRouteD662FC53",
+    "StudentAdmissionVpcPublicSubnet1EIPA4CB2D00",
+    "StudentAdmissionVpcPublicSubnet1NATGatewayC8662CC5",
+    "StudentAdmissionVpcPublicSubnet1RouteTable29C91CF3",
+    "StudentAdmissionVpcPublicSubnet1RouteTableAssociation4B85B224",
+    "StudentAdmissionVpcPublicSubnet1Subnet647AAB75",
+    "StudentAdmissionVpcPublicSubnet2DefaultRouteDA184511",
+    "StudentAdmissionVpcPublicSubnet2RouteTable2DB92FF2",
+    "StudentAdmissionVpcPublicSubnet2RouteTableAssociation5004C34D",
+    "StudentAdmissionVpcPublicSubnet2Subnet7669F2EB",
+    "StudentAdmissionVpc4922FA93",
+    "StudentAdmissionVpcVPCGW37ECA50F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/Resource/CreationRole/Resource"
+   }
+  },
+  "StudentAdmissionClusterCreationRoleDefaultPolicy74CEF87A": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "EksClusterRole30336171",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "eks:CreateCluster",
+        "eks:DescribeCluster",
+        "eks:DescribeUpdate",
+        "eks:DeleteCluster",
+        "eks:UpdateClusterVersion",
+        "eks:UpdateClusterConfig",
+        "eks:CreateFargateProfile",
+        "eks:TagResource",
+        "eks:UntagResource"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":eks:ap-southeast-2:445567082568:cluster/student-admission-app-cluster"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":eks:ap-southeast-2:445567082568:cluster/student-admission-app-cluster/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "eks:DescribeFargateProfile",
+        "eks:DeleteFargateProfile"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":eks:ap-southeast-2:445567082568:fargateprofile/student-admission-app-cluster/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "iam:GetRole",
+        "iam:listAttachedRolePolicies"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "iam:CreateServiceLinkedRole",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeVpcs"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "StudentAdmissionClusterCreationRoleDefaultPolicy74CEF87A",
+    "Roles": [
+     {
+      "Ref": "StudentAdmissionClusterCreationRoleE162DA91"
+     }
+    ]
+   },
+   "DependsOn": [
+    "StudentAdmissionVpcIGW2BDFF927",
+    "StudentAdmissionVpcPrivateSubnet1DefaultRouteE07A872B",
+    "StudentAdmissionVpcPrivateSubnet1RouteTable4DBBFAE3",
+    "StudentAdmissionVpcPrivateSubnet1RouteTableAssociation8A134C15",
+    "StudentAdmissionVpcPrivateSubnet1Subnet097E90C6",
+    "StudentAdmissionVpcPrivateSubnet2DefaultRoute15485B9C",
+    "StudentAdmissionVpcPrivateSubnet2RouteTableF8BA913F",
+    "StudentAdmissionVpcPrivateSubnet2RouteTableAssociation373436E1",
+    "StudentAdmissionVpcPrivateSubnet2Subnet2B8C7D36",
+    "StudentAdmissionVpcPublicSubnet1DefaultRouteD662FC53",
+    "StudentAdmissionVpcPublicSubnet1EIPA4CB2D00",
+    "StudentAdmissionVpcPublicSubnet1NATGatewayC8662CC5",
+    "StudentAdmissionVpcPublicSubnet1RouteTable29C91CF3",
+    "StudentAdmissionVpcPublicSubnet1RouteTableAssociation4B85B224",
+    "StudentAdmissionVpcPublicSubnet1Subnet647AAB75",
+    "StudentAdmissionVpcPublicSubnet2DefaultRouteDA184511",
+    "StudentAdmissionVpcPublicSubnet2RouteTable2DB92FF2",
+    "StudentAdmissionVpcPublicSubnet2RouteTableAssociation5004C34D",
+    "StudentAdmissionVpcPublicSubnet2Subnet7669F2EB",
+    "StudentAdmissionVpc4922FA93",
+    "StudentAdmissionVpcVPCGW37ECA50F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/Resource/CreationRole/DefaultPolicy/Resource"
+   }
+  },
+  "StudentAdmissionClusterAF47D13E": {
+   "Type": "Custom::AWSCDK-EKS-Cluster",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+      "Outputs.StudentAdmissionAppStackawscdkawseksClusterResourceProviderframeworkonEvent3A57A19DArn"
+     ]
+    },
+    "Config": {
+     "name": "student-admission-app-cluster",
+     "version": "1.29",
+     "roleArn": {
+      "Fn::GetAtt": [
+       "EksClusterRole30336171",
+       "Arn"
+      ]
+     },
+     "kubernetesNetworkConfig": {
+      "ipFamily": "ipv4"
+     },
+     "resourcesVpcConfig": {
+      "subnetIds": [
+       {
+        "Ref": "StudentAdmissionVpcPrivateSubnet1Subnet097E90C6"
+       },
+       {
+        "Ref": "StudentAdmissionVpcPrivateSubnet2Subnet2B8C7D36"
+       }
+      ],
+      "securityGroupIds": [
+       {
+        "Fn::GetAtt": [
+         "StudentAdmissionClusterControlPlaneSecurityGroupA2134548",
+         "GroupId"
+        ]
+       }
+      ],
+      "endpointPublicAccess": true,
+      "endpointPrivateAccess": true
+     },
+     "accessConfig": {}
+    },
+    "AssumeRoleArn": {
+     "Fn::GetAtt": [
+      "StudentAdmissionClusterCreationRoleE162DA91",
+      "Arn"
+     ]
+    },
+    "AttributesRevision": 3
+   },
+   "DependsOn": [
+    "StudentAdmissionClusterCreationRoleDefaultPolicy74CEF87A",
+    "StudentAdmissionClusterCreationRoleE162DA91",
+    "StudentAdmissionVpcIGW2BDFF927",
+    "StudentAdmissionVpcPrivateSubnet1DefaultRouteE07A872B",
+    "StudentAdmissionVpcPrivateSubnet1RouteTable4DBBFAE3",
+    "StudentAdmissionVpcPrivateSubnet1RouteTableAssociation8A134C15",
+    "StudentAdmissionVpcPrivateSubnet1Subnet097E90C6",
+    "StudentAdmissionVpcPrivateSubnet2DefaultRoute15485B9C",
+    "StudentAdmissionVpcPrivateSubnet2RouteTableF8BA913F",
+    "StudentAdmissionVpcPrivateSubnet2RouteTableAssociation373436E1",
+    "StudentAdmissionVpcPrivateSubnet2Subnet2B8C7D36",
+    "StudentAdmissionVpcPublicSubnet1DefaultRouteD662FC53",
+    "StudentAdmissionVpcPublicSubnet1EIPA4CB2D00",
+    "StudentAdmissionVpcPublicSubnet1NATGatewayC8662CC5",
+    "StudentAdmissionVpcPublicSubnet1RouteTable29C91CF3",
+    "StudentAdmissionVpcPublicSubnet1RouteTableAssociation4B85B224",
+    "StudentAdmissionVpcPublicSubnet1Subnet647AAB75",
+    "StudentAdmissionVpcPublicSubnet2DefaultRouteDA184511",
+    "StudentAdmissionVpcPublicSubnet2RouteTable2DB92FF2",
+    "StudentAdmissionVpcPublicSubnet2RouteTableAssociation5004C34D",
+    "StudentAdmissionVpcPublicSubnet2Subnet7669F2EB",
+    "StudentAdmissionVpc4922FA93",
+    "StudentAdmissionVpcVPCGW37ECA50F"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/Resource/Resource/Default"
+   }
+  },
+  "StudentAdmissionClusterKubectlReadyBarrier70687511": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "aws:cdk:eks:kubectl-ready"
+   },
+   "DependsOn": [
+    "StudentAdmissionClusterCreationRoleDefaultPolicy74CEF87A",
+    "StudentAdmissionClusterCreationRoleE162DA91",
+    "StudentAdmissionClusterAF47D13E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/KubectlReadyBarrier"
+   }
+  },
+  "StudentAdmissionClusterNodegroupStudentAdmissionNodesNodeGroupRole8349E01C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSWorkerNodePolicy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKS_CNI_Policy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/NodegroupStudentAdmissionNodes/NodeGroupRole/Resource"
+   }
+  },
+  "StudentAdmissionClusterNodegroupStudentAdmissionNodes8C9D1E65": {
+   "Type": "AWS::EKS::Nodegroup",
+   "Properties": {
+    "AmiType": "AL2_x86_64",
+    "ClusterName": {
+     "Ref": "StudentAdmissionClusterAF47D13E"
+    },
+    "ForceUpdateEnabled": true,
+    "InstanceTypes": [
+     "t3.medium"
+    ],
+    "NodeRole": {
+     "Fn::GetAtt": [
+      "StudentAdmissionClusterNodegroupStudentAdmissionNodesNodeGroupRole8349E01C",
+      "Arn"
+     ]
+    },
+    "NodegroupName": "student-admission-app-nodes",
+    "ScalingConfig": {
+     "DesiredSize": 2,
+     "MaxSize": 3,
+     "MinSize": 1
+    },
+    "Subnets": [
+     {
+      "Ref": "StudentAdmissionVpcPrivateSubnet1Subnet097E90C6"
+     },
+     {
+      "Ref": "StudentAdmissionVpcPrivateSubnet2Subnet2B8C7D36"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/NodegroupStudentAdmissionNodes/Resource"
+   }
+  },
+  "StudentAdmissionClusterAwsAuthmanifest62DCD7E8": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.StudentAdmissionAppStackawscdkawseksKubectlProviderframeworkonEvent84D9698CArn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ConfigMap\",\"metadata\":{\"name\":\"aws-auth\",\"namespace\":\"kube-system\",\"labels\":{\"aws.cdk.eks/prune-c877c041e94aad65e7a413787a216cb8b410543847\":\"\"}},\"data\":{\"mapRoles\":\"[{\\\"rolearn\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "StudentAdmissionClusterNodegroupStudentAdmissionNodesNodeGroupRole8349E01C",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"username\\\":\\\"system:node:{{EC2PrivateDNSName}}\\\",\\\"groups\\\":[\\\"system:bootstrappers\\\",\\\"system:nodes\\\"]}]\",\"mapUsers\":\"[{\\\"userarn\\\":\\\"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::445567082568:user/clarilook.aws\\\",\\\"username\\\":\\\"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::445567082568:user/clarilook.aws\\\",\\\"groups\\\":[\\\"system:masters\\\"]}]\",\"mapAccounts\":\"[]\"}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "StudentAdmissionClusterAF47D13E"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "StudentAdmissionClusterCreationRoleE162DA91",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c877c041e94aad65e7a413787a216cb8b410543847",
+    "Overwrite": true
+   },
+   "DependsOn": [
+    "StudentAdmissionClusterKubectlReadyBarrier70687511"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/AwsAuth/manifest/Resource/Default"
+   }
+  },
+  "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "TemplateURL": {
+     "Fn::Join": [
+      "",
+      [
+       "https://s3.ap-southeast-2.",
+       {
+        "Ref": "AWS::URLSuffix"
+       },
+       "/cdk-hnb659fds-assets-445567082568-ap-southeast-2/27b44ea1f36b1e6d8285c5d15d74851c3b0c83939beead2d8bd4bd6769f2c11e.json"
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource",
+    "aws:asset:path": "StudentAdmissionAppStackawscdkawseksClusterResourceProvider2125B401.nested.template.json",
+    "aws:asset:property": "TemplateURL"
+   }
+  },
+  "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "Parameters": {
+     "referencetoStudentAdmissionAppStackStudentAdmissionClusterKubectlHandlerRoleF890B0EDArn": {
+      "Fn::GetAtt": [
+       "StudentAdmissionClusterKubectlHandlerRoleA5565D1A",
+       "Arn"
+      ]
+     },
+     "referencetoStudentAdmissionAppStackStudentAdmissionVpcPrivateSubnet1Subnet6C17FC5BRef": {
+      "Ref": "StudentAdmissionVpcPrivateSubnet1Subnet097E90C6"
+     },
+     "referencetoStudentAdmissionAppStackStudentAdmissionVpcPrivateSubnet2Subnet64282518Ref": {
+      "Ref": "StudentAdmissionVpcPrivateSubnet2Subnet2B8C7D36"
+     },
+     "referencetoStudentAdmissionAppStackStudentAdmissionCluster6DCF4C8FClusterSecurityGroupId": {
+      "Fn::GetAtt": [
+       "StudentAdmissionClusterAF47D13E",
+       "ClusterSecurityGroupId"
+      ]
+     }
+    },
+    "TemplateURL": {
+     "Fn::Join": [
+      "",
+      [
+       "https://s3.ap-southeast-2.",
+       {
+        "Ref": "AWS::URLSuffix"
+       },
+       "/cdk-hnb659fds-assets-445567082568-ap-southeast-2/d58c41e699b3bb58a832597a45cdc6b5475443352e2477bbbbaa96832c80fb9a.json"
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "StudentAdmissionClusterKubectlHandlerRoleDefaultPolicy21813772",
+    "StudentAdmissionClusterKubectlHandlerRoleA5565D1A",
+    "StudentAdmissionVpcPrivateSubnet1DefaultRouteE07A872B",
+    "StudentAdmissionVpcPrivateSubnet1RouteTableAssociation8A134C15",
+    "StudentAdmissionVpcPrivateSubnet2DefaultRoute15485B9C",
+    "StudentAdmissionVpcPrivateSubnet2RouteTableAssociation373436E1"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource",
+    "aws:asset:path": "StudentAdmissionAppStackawscdkawseksKubectlProviderDE97A89F.nested.template.json",
+    "aws:asset:property": "TemplateURL"
+   }
+  },
+  "GithubActionsUserPolicy8E202A08": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:CompleteLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:InitiateLayerUpload",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:PutImage"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "StudentAdmissionEcr67053003",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "GithubActionsUserPolicy8E202A08",
+    "Users": [
+     "clarilook.aws"
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/GithubActionsUser/Policy/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/01RTWvDMAz9Lb27XtvBtmsIo5SxLiSj1+G4aqslsYMlLZSQ/z6SrPVO74OH9JA2ev30rFcL09HSHqtljaXuCza2Uqajrx7sRveH1qr05A5ZqjIpa7SFlA549CLLvTB8mrKG6EcvIfIWDaN39/BIXnfZCHvDW8PQmavKAv4Yhjh45xiCg3tgbvKnEmZjLw04VgVYCcjXbfDSTh3+G4MCG3SfQ+sJ2YdpTlSDQtPoPvdz/QkzX6OdcjMbFFSk+7QWYghq749wvu2KIukoEb6oNymn2kDvxuEJiIdB5UBeggWVCrFvohy7RJ56d8TbreZvpCf3IdwKDyq78sW7h0f9oterxTchLoM4xgZ0PuMviuSTRdYBAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Conditions": {
+  "StudentAdmissionClusterHasEcrPublic2F5E821B": {
+   "Fn::Equals": [
+    {
+     "Ref": "AWS::Partition"
+    },
+    "aws"
+   ]
+  }
+ },
+ "Outputs": {
+  "VpcId": {
+   "Description": "VPC ID",
+   "Value": {
+    "Ref": "StudentAdmissionVpc4922FA93"
+   }
+  },
+  "EcrRepositoryUri": {
+   "Description": "ECR Repository URI — use this in GitHub Actions",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      {
+       "Fn::Select": [
+        4,
+        {
+         "Fn::Split": [
+          ":",
+          {
+           "Fn::GetAtt": [
+            "StudentAdmissionEcr67053003",
+            "Arn"
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      ".dkr.ecr.",
+      {
+       "Fn::Select": [
+        3,
+        {
+         "Fn::Split": [
+          ":",
+          {
+           "Fn::GetAtt": [
+            "StudentAdmissionEcr67053003",
+            "Arn"
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      ".",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "StudentAdmissionEcr67053003"
+      }
+     ]
+    ]
+   }
+  },
+  "EksClusterName": {
+   "Description": "EKS Cluster Name",
+   "Value": {
+    "Ref": "StudentAdmissionClusterAF47D13E"
+   }
+  },
+  "EksClusterEndpoint": {
+   "Description": "EKS Cluster Endpoint",
+   "Value": {
+    "Fn::GetAtt": [
+     "StudentAdmissionClusterAF47D13E",
+     "Endpoint"
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
