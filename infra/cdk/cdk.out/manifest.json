@@ -1,0 +1,551 @@
+{
+  "version": "38.0.1",
+  "artifacts": {
+    "StudentAdmissionAppStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "StudentAdmissionAppStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "StudentAdmissionAppStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://445567082568/ap-southeast-2",
+      "properties": {
+        "templateFile": "StudentAdmissionAppStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "notificationArns": [],
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::445567082568:role/cdk-hnb659fds-deploy-role-445567082568-ap-southeast-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::445567082568:role/cdk-hnb659fds-cfn-exec-role-445567082568-ap-southeast-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-445567082568-ap-southeast-2/4fb0867dce58316c2a694d4f764fbcdaa904b48d819a0e93271f933e12f90ae1.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "StudentAdmissionAppStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::445567082568:role/cdk-hnb659fds-lookup-role-445567082568-ap-southeast-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "StudentAdmissionAppStack.assets"
+      ],
+      "metadata": {
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpc4922FA93"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPublicSubnet1Subnet647AAB75"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPublicSubnet1RouteTable29C91CF3"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPublicSubnet1RouteTableAssociation4B85B224"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPublicSubnet1DefaultRouteD662FC53"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPublicSubnet1EIPA4CB2D00"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPublicSubnet1NATGatewayC8662CC5"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPublicSubnet2Subnet7669F2EB"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPublicSubnet2RouteTable2DB92FF2"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPublicSubnet2RouteTableAssociation5004C34D"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPublicSubnet2DefaultRouteDA184511"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPrivateSubnet1Subnet097E90C6"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPrivateSubnet1RouteTable4DBBFAE3"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPrivateSubnet1RouteTableAssociation8A134C15"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPrivateSubnet1DefaultRouteE07A872B"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPrivateSubnet2Subnet2B8C7D36"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPrivateSubnet2RouteTableF8BA913F"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPrivateSubnet2RouteTableAssociation373436E1"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcPrivateSubnet2DefaultRoute15485B9C"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcIGW2BDFF927"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionVpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionVpcVPCGW37ECA50F"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionEcr/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionEcr67053003"
+          }
+        ],
+        "/StudentAdmissionAppStack/EksClusterRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EksClusterRole30336171"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "You created a cluster with Kubernetes Version 1.29 without specifying the kubectlLayer property. This may cause failures as the kubectl version provided with aws-cdk-lib is 1.20, which is only guaranteed to be compatible with Kubernetes versions 1.19-1.21. Please provide a kubectlLayer from @aws-cdk/lambda-layer-kubectl-v29. [ack: @aws-cdk/aws-eks:clusterKubectlLayerNotSpecified]",
+            "trace": [
+              "Annotations.addMessage (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-RL2Jqc\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:1608)",
+              "Annotations.addWarningV2 (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-RL2Jqc\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:825)",
+              "new Cluster (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-RL2Jqc\\node_modules\\aws-cdk-lib\\aws-eks\\lib\\cluster.js:1:10102)",
+              "Kernel._Kernel_create (C:\\Users\\asus\\AppData\\Local\\Temp\\tmp3rqdiyac\\lib\\program.js:9127:25)",
+              "Kernel.create (C:\\Users\\asus\\AppData\\Local\\Temp\\tmp3rqdiyac\\lib\\program.js:8798:93)",
+              "KernelHost.processRequest (C:\\Users\\asus\\AppData\\Local\\Temp\\tmp3rqdiyac\\lib\\program.js:10715:36)",
+              "KernelHost.run (C:\\Users\\asus\\AppData\\Local\\Temp\\tmp3rqdiyac\\lib\\program.js:10675:22)",
+              "Immediate._onImmediate (C:\\Users\\asus\\AppData\\Local\\Temp\\tmp3rqdiyac\\lib\\program.js:10676:46)",
+              "process.processImmediate (node:internal/timers:476:21)"
+            ]
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/KubectlHandlerRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterKubectlHandlerRoleA5565D1A"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/KubectlHandlerRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterKubectlHandlerRoleDefaultPolicy21813772"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/ControlPlaneSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterControlPlaneSecurityGroupA2134548"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/Resource/CreationRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterCreationRoleE162DA91"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/Resource/CreationRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterCreationRoleDefaultPolicy74CEF87A"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/Resource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterAF47D13E"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/KubectlReadyBarrier": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterKubectlReadyBarrier70687511"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/HasEcrPublic": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterHasEcrPublic2F5E821B"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/NodegroupStudentAdmissionNodes/NodeGroupRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterNodegroupStudentAdmissionNodesNodeGroupRole8349E01C"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/NodegroupStudentAdmissionNodes/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterNodegroupStudentAdmissionNodes8C9D1E65"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/AwsAuth/manifest/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterAwsAuthmanifest62DCD7E8"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodeProxyAgentLayer924C1971"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 0
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandlerServiceRole15A26729"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandler42BEBAE0"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 0
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandlerServiceRole5810CC58"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandler7073F4DA"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleB1087139"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleDefaultPolicy2E7140AC"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisComplete26D7B0CB"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRole28643D26"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRoleDefaultPolicy2688969F"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeout0B47CA38"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRole0C7159F9"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRoleDefaultPolicyD3C3DA1A"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineLogGroupDD693A98"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Providerwaiterstatemachine5D4A9DF0"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/StudentAdmissionAppStackawscdkawseksClusterResourceProviderOnEventHandlerServiceRoleCB08332DArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionAppStackawscdkawseksClusterResourceProviderOnEventHandlerServiceRoleCB08332DArn"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/StudentAdmissionAppStackawscdkawseksClusterResourceProviderIsCompleteHandlerServiceRole98374A70Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionAppStackawscdkawseksClusterResourceProviderIsCompleteHandlerServiceRole98374A70Arn"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/StudentAdmissionAppStackawscdkawseksClusterResourceProviderframeworkonEvent3A57A19DArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionAppStackawscdkawseksClusterResourceProviderframeworkonEvent3A57A19DArn"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/Handler": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 2
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Handler886CB40B"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsCliLayerF44AAF94"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubectlLayer600207B5"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/StudentAdmissionAppStackawscdkawseksKubectlProviderframeworkonEvent84D9698CArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionAppStackawscdkawseksKubectlProviderframeworkonEvent84D9698CArn"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/reference-to-StudentAdmissionAppStackStudentAdmissionClusterKubectlHandlerRoleF890B0EDArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoStudentAdmissionAppStackStudentAdmissionClusterKubectlHandlerRoleF890B0EDArn"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/reference-to-StudentAdmissionAppStackStudentAdmissionVpcPrivateSubnet1Subnet6C17FC5BRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoStudentAdmissionAppStackStudentAdmissionVpcPrivateSubnet1Subnet6C17FC5BRef"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/reference-to-StudentAdmissionAppStackStudentAdmissionVpcPrivateSubnet2Subnet64282518Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoStudentAdmissionAppStackStudentAdmissionVpcPrivateSubnet2Subnet64282518Ref"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider/reference-to-StudentAdmissionAppStackStudentAdmissionCluster6DCF4C8FClusterSecurityGroupId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoStudentAdmissionAppStackStudentAdmissionCluster6DCF4C8FClusterSecurityGroupId"
+          }
+        ],
+        "/StudentAdmissionAppStack/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B"
+          }
+        ],
+        "/StudentAdmissionAppStack/GithubActionsUser/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GithubActionsUserPolicy8E202A08"
+          }
+        ],
+        "/StudentAdmissionAppStack/VpcId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcId"
+          }
+        ],
+        "/StudentAdmissionAppStack/EcrRepositoryUri": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EcrRepositoryUri"
+          }
+        ],
+        "/StudentAdmissionAppStack/EksClusterName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EksClusterName"
+          }
+        ],
+        "/StudentAdmissionAppStack/EksClusterEndpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EksClusterEndpoint"
+          }
+        ],
+        "/StudentAdmissionAppStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/StudentAdmissionAppStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/StudentAdmissionAppStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "StudentAdmissionAppStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
