@@ -1,9 +1,12 @@
 # Student Admission App
-> **AWS CDK** provisions infra → **GitHub Actions** builds & deploys → **Amazon EKS** runs the app
 
-The Student Admission App is a web-based frontend application that allows prospective students to submit their admission applications for a certain college online. The form collects personal details, passport and visa information, contact details, academic history, English language proficiency results, and course selection preferences. It is built as a static frontend served via nginx, containerised with Docker, and deployed to Amazon EKS on AWS.
+The Student Admission App is a web-based frontend application that allows prospective students to submit their admission applications for a certain college online. The form collects personal details, passport and visa information, contact details, academic history, English language proficiency results, and course selection preferences.
 
-This project demonstrates modern DevOps practices — specifically how Infrastructure as Code (AWS CDK), containerisation (Docker), and a fully automated CI/CD pipeline (GitHub Actions) work together to deliver a reliable and repeatable deployment workflow. Rather than manually provisioning cloud resources or deploying by hand, every part of the stack — from the VPC and Kubernetes cluster down to the running application — is defined as code and automated.
+It is built as a static frontend served via nginx, containerised with Docker, and deployed to Amazon EKS on AWS.
+
+This project demonstrates modern DevOps practices, specifically how Infrastructure as Code (AWS CDK), containerisation (Docker), and a fully automated CI/CD pipeline (GitHub Actions) work together to deliver a reliable and repeatable deployment workflow.
+
+Rather than manually provisioning cloud resources or deploying by hand, every part of the stack, from the VPC and Kubernetes cluster down to the running application, is defined as code and automated.
 
 ---
 
