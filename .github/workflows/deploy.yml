@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
+  workflow_dispatch:   # allows manual trigger from GitHub UI
 
 env:
   AWS_REGION: ap-southeast-2
@@ -17,11 +17,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ── 1. Checkout code ──────────────────────────────────────────
+      # ── 1. Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ── 2. Configure AWS credentials ──────────────────────────────
+      # ── 2. Configure AWS credentials
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -29,12 +29,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      # ── 3. Login to Amazon ECR ────────────────────────────────────
+      # ── 3. Login to Amazon ECR
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      # ── 4. Build and push Docker image ────────────────────────────
+      # ── 4. Build and push Docker image
       - name: Build, tag, and push image to ECR
         id: build-image
         env:
@@ -51,14 +51,14 @@ jobs:
 
           echo "image=$IMAGE_URI" >> $GITHUB_OUTPUT
 
-      # ── 5. Update kubeconfig for EKS ─────────────────────────────
+      # ── 5. Update kubeconfig for EKS
       - name: Update kubeconfig
         run: |
           aws eks update-kubeconfig \
             --name ${{ env.EKS_CLUSTER_NAME }} \
             --region ${{ env.AWS_REGION }}
 
-      # ── 6. Deploy to EKS ──────────────────────────────────────────
+      # ── 6. Deploy to EKS
       - name: Deploy to EKS
         env:
           IMAGE_URI: ${{ steps.build-image.outputs.image }}
@@ -75,7 +75,7 @@ jobs:
           # Wait for rollout to complete
           kubectl rollout status deployment/student-admission-app --timeout=120s
 
-      # ── 7. Print app URL ──────────────────────────────────────────
+      # ── 7. Print app URL
       - name: Get Load Balancer URL
         run: |
           echo "Waiting for LoadBalancer external IP..."
@@ -84,3 +84,5 @@ jobs:
             -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
           echo ""
           echo "App is live at the URL above!"
+
+      # ── 8. Testing (optional)
