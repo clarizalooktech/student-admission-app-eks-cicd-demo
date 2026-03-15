@@ -12,7 +12,7 @@ StudentAdmissionAppStack(
         account=os.environ.get("CDK_DEFAULT_ACCOUNT"),
         region=os.environ.get("CDK_DEFAULT_REGION", "ap-southeast-2")
     ),
-    description="Student Admission App — VPC, EKS, and ECR infrastructure"
+    description="Student Admission App - VPC, EKS, and ECR infrastructure"
 )
 
 app.synth()

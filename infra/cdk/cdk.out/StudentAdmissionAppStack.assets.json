@@ -85,6 +85,34 @@
         }
       }
     },
+    "2926656cdb97b26d98f8b957b0d3f7326b458679745f2817e50333a21767350c": {
+      "source": {
+        "path": "asset.2926656cdb97b26d98f8b957b0d3f7326b458679745f2817e50333a21767350c",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "445567082568-ap-southeast-2": {
+          "bucketName": "cdk-hnb659fds-assets-445567082568-ap-southeast-2",
+          "objectKey": "2926656cdb97b26d98f8b957b0d3f7326b458679745f2817e50333a21767350c.zip",
+          "region": "ap-southeast-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::445567082568:role/cdk-hnb659fds-file-publishing-role-445567082568-ap-southeast-2"
+        }
+      }
+    },
+    "c398d076c966a47ee4ef862fbaf5ea530bf035b867a0195292c99f77b323ed80": {
+      "source": {
+        "path": "asset.c398d076c966a47ee4ef862fbaf5ea530bf035b867a0195292c99f77b323ed80",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "445567082568-ap-southeast-2": {
+          "bucketName": "cdk-hnb659fds-assets-445567082568-ap-southeast-2",
+          "objectKey": "c398d076c966a47ee4ef862fbaf5ea530bf035b867a0195292c99f77b323ed80.zip",
+          "region": "ap-southeast-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::445567082568:role/cdk-hnb659fds-file-publishing-role-445567082568-ap-southeast-2"
+        }
+      }
+    },
     "27b44ea1f36b1e6d8285c5d15d74851c3b0c83939beead2d8bd4bd6769f2c11e": {
       "source": {
         "path": "StudentAdmissionAppStackawscdkawseksClusterResourceProvider2125B401.nested.template.json",
@@ -113,7 +141,7 @@
         }
       }
     },
-    "4fb0867dce58316c2a694d4f764fbcdaa904b48d819a0e93271f933e12f90ae1": {
+    "492a618217e262ecbded9374fcf2c50780e510b8c0082eb02c775f95b6aa74f5": {
       "source": {
         "path": "StudentAdmissionAppStack.template.json",
         "packaging": "file"
@@ -121,7 +149,7 @@
       "destinations": {
         "445567082568-ap-southeast-2": {
           "bucketName": "cdk-hnb659fds-assets-445567082568-ap-southeast-2",
-          "objectKey": "4fb0867dce58316c2a694d4f764fbcdaa904b48d819a0e93271f933e12f90ae1.json",
+          "objectKey": "492a618217e262ecbded9374fcf2c50780e510b8c0082eb02c775f95b6aa74f5.json",
           "region": "ap-southeast-2",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::445567082568:role/cdk-hnb659fds-file-publishing-role-445567082568-ap-southeast-2"
         }

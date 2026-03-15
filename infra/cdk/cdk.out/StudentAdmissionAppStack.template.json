@@ -1,5 +1,5 @@
 {
- "Description": "Student Admission App — VPC, EKS, and ECR infrastructure",
+ "Description": "Student Admission App - VPC, EKS, and ECR infrastructure",
  "Resources": {
   "StudentAdmissionVpc4922FA93": {
    "Type": "AWS::EC2::VPC",
@@ -1069,6 +1069,266 @@
     "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/AwsAuth/manifest/Resource/Default"
    }
   },
+  "StudentAdmissionClusterALBServiceAccountConditionJson7BBF1657": {
+   "Type": "Custom::AWSCDKCfnJson",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+      "Arn"
+     ]
+    },
+    "Value": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "StudentAdmissionClusterOpenIdConnectProvider12503D71"
+           }
+          ]
+         }
+        ]
+       },
+       ":aud\":\"sts.amazonaws.com\",\"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           ":oidc-provider/",
+           {
+            "Ref": "StudentAdmissionClusterOpenIdConnectProvider12503D71"
+           }
+          ]
+         }
+        ]
+       },
+       ":sub\":\"system:serviceaccount:kube-system:aws-load-balancer-controller\"}"
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/ConditionJson/Resource/Default"
+   }
+  },
+  "StudentAdmissionClusterALBServiceAccountRole467FCE43": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "Fn::GetAtt": [
+          "StudentAdmissionClusterALBServiceAccountConditionJson7BBF1657",
+          "Value"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": {
+         "Ref": "StudentAdmissionClusterOpenIdConnectProvider12503D71"
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/ElasticLoadBalancingFullAccess"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/Role/Resource"
+   }
+  },
+  "StudentAdmissionClusterALBServiceAccountRoleDefaultPolicyE03A73E2": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ec2:DescribeAccountAttributes",
+        "ec2:DescribeAddresses",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeInternetGateways",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeVpcPeeringConnections",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeInstances",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeTags",
+        "ec2:GetCoipPoolUsage",
+        "ec2:DescribeCoipPools",
+        "ec2:CreateSecurityGroup",
+        "ec2:CreateTags",
+        "ec2:DeleteTags",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:DeleteSecurityGroup",
+        "elasticloadbalancing:*"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "StudentAdmissionClusterALBServiceAccountRoleDefaultPolicyE03A73E2",
+    "Roles": [
+     {
+      "Ref": "StudentAdmissionClusterALBServiceAccountRole467FCE43"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/Role/DefaultPolicy/Resource"
+   }
+  },
+  "StudentAdmissionClusterALBServiceAccountmanifestALBServiceAccountServiceAccountResource4E7C7375": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.StudentAdmissionAppStackawscdkawseksKubectlProviderframeworkonEvent84D9698CArn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ServiceAccount\",\"metadata\":{\"name\":\"aws-load-balancer-controller\",\"namespace\":\"kube-system\",\"labels\":{\"aws.cdk.eks/prune-c84d45b64d898d95366a17281e999c6887414d6570\":\"\",\"app.kubernetes.io/name\":\"aws-load-balancer-controller\"},\"annotations\":{\"eks.amazonaws.com/role-arn\":\"",
+       {
+        "Fn::GetAtt": [
+         "StudentAdmissionClusterALBServiceAccountRole467FCE43",
+         "Arn"
+        ]
+       },
+       "\"}}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "StudentAdmissionClusterAF47D13E"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "StudentAdmissionClusterCreationRoleE162DA91",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c84d45b64d898d95366a17281e999c6887414d6570"
+   },
+   "DependsOn": [
+    "StudentAdmissionClusterKubectlReadyBarrier70687511"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/manifest-ALBServiceAccountServiceAccountResource/Resource/Default"
+   }
+  },
+  "StudentAdmissionClusterOpenIdConnectProvider12503D71": {
+   "Type": "Custom::AWSCDKOpenIdConnectProvider",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0",
+      "Arn"
+     ]
+    },
+    "ClientIDList": [
+     "sts.amazonaws.com"
+    ],
+    "Url": {
+     "Fn::GetAtt": [
+      "StudentAdmissionClusterAF47D13E",
+      "OpenIdConnectIssuerUrl"
+     ]
+    },
+    "CodeHash": "2926656cdb97b26d98f8b957b0d3f7326b458679745f2817e50333a21767350c"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/OpenIdConnectProvider/Resource/Default"
+   }
+  },
+  "StudentAdmissionClusterchartAWSLoadBalancerController3B1AD640": {
+   "Type": "Custom::AWSCDK-EKS-HelmChart",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.StudentAdmissionAppStackawscdkawseksKubectlProviderframeworkonEvent84D9698CArn"
+     ]
+    },
+    "ClusterName": {
+     "Ref": "StudentAdmissionClusterAF47D13E"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "StudentAdmissionClusterCreationRoleE162DA91",
+      "Arn"
+     ]
+    },
+    "Release": "dmissionclusterchartawsloadbalancercontrollerc439fdb5",
+    "Chart": "aws-load-balancer-controller",
+    "Values": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"clusterName\":\"",
+       {
+        "Ref": "StudentAdmissionClusterAF47D13E"
+       },
+       "\",\"serviceAccount\":{\"create\":false,\"name\":\"aws-load-balancer-controller\"}}"
+      ]
+     ]
+    },
+    "Namespace": "kube-system",
+    "Repository": "https://aws.github.io/eks-charts",
+    "CreateNamespace": true
+   },
+   "DependsOn": [
+    "StudentAdmissionClusterALBServiceAccountConditionJson7BBF1657",
+    "StudentAdmissionClusterALBServiceAccountmanifestALBServiceAccountServiceAccountResource4E7C7375",
+    "StudentAdmissionClusterALBServiceAccountRoleDefaultPolicyE03A73E2",
+    "StudentAdmissionClusterALBServiceAccountRole467FCE43",
+    "StudentAdmissionClusterKubectlReadyBarrier70687511"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/StudentAdmissionCluster/chart-AWSLoadBalancerController/Resource/Default"
+   }
+  },
   "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": {
    "Type": "AWS::CloudFormation::Stack",
    "Properties": {
@@ -1145,6 +1405,131 @@
     "aws:asset:property": "TemplateURL"
    }
   },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Resource": "*",
+         "Action": [
+          "iam:CreateOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider",
+          "iam:UpdateOpenIDConnectProviderThumbprint",
+          "iam:AddClientIDToOpenIDConnectProvider",
+          "iam:RemoveClientIDFromOpenIDConnectProvider"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role"
+   }
+  },
+  "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-445567082568-ap-southeast-2",
+     "S3Key": "2926656cdb97b26d98f8b957b0d3f7326b458679745f2817e50333a21767350c.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.2926656cdb97b26d98f8b957b0d3f7326b458679745f2817e50333a21767350c",
+    "aws:asset:property": "Code"
+   }
+  },
+  "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/AWSCDKCfnUtilsProviderCustomResourceProvider/Role"
+   }
+  },
+  "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-445567082568-ap-southeast-2",
+     "S3Key": "c398d076c966a47ee4ef862fbaf5ea530bf035b867a0195292c99f77b323ed80.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x"
+   },
+   "DependsOn": [
+    "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "StudentAdmissionAppStack/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.c398d076c966a47ee4ef862fbaf5ea530bf035b867a0195292c99f77b323ed80",
+    "aws:asset:property": "Code"
+   }
+  },
   "GithubActionsUserPolicy8E202A08": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
@@ -1186,7 +1571,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/01RTWvDMAz9Lb27XtvBtmsIo5SxLiSj1+G4aqslsYMlLZSQ/z6SrPVO74OH9JA2ev30rFcL09HSHqtljaXuCza2Uqajrx7sRveH1qr05A5ZqjIpa7SFlA549CLLvTB8mrKG6EcvIfIWDaN39/BIXnfZCHvDW8PQmavKAv4Yhjh45xiCg3tgbvKnEmZjLw04VgVYCcjXbfDSTh3+G4MCG3SfQ+sJ2YdpTlSDQtPoPvdz/QkzX6OdcjMbFFSk+7QWYghq749wvu2KIukoEb6oNymn2kDvxuEJiIdB5UBeggWVCrFvohy7RJ56d8TbreZvpCf3IdwKDyq78sW7h0f9oterxTchLoM4xgZ0PuMviuSTRdYBAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1VRTU/DMAz9LbtnYRsScC0VGgOxVS3aFaWpt5q1SRU7q6aq/x21ZQuc3oee7adkJZcPj3IxUy3NdXGaV5jLLmOlT0K19NWBXslu32gRH8w+iUXi8wp15nMDPHiBpdYzfKq8guAHLyKyGhWjNbfwQF42yQBbxWvF0KqLSByeFUNYvDEMzsAtMDX5VRGz0mUNhkUG2jvky9pZ34wd/hq9AO1kl0JjCdm6cU9QvUBVyy61U/0RE1uhHnMT6wWcSHZx5YnBia0t4Hi9FUTUUuS5FO8+H2sDfSiDB6ChoTujhkhr6w2LXQNmU8TWGNCcOHvGApx4haqOS+W470UKZL3TIGJPbOsgh+qBx9YUeH3aN5pw+sT/g9cjz4pARETAGasjmuMwsPPceO5FcuHSmrt7+SSXi9k3Ic6dN4w1yHTCH1eUPM41AgAA"
    },
    "Metadata": {
     "aws:cdk:path": "StudentAdmissionAppStack/CDKMetadata/Default"
