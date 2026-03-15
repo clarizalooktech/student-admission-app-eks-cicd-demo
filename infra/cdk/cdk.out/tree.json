@@ -1315,6 +1315,255 @@
                   "fqn": "aws-cdk-lib.aws_eks.AwsAuth",
                   "version": "2.167.0"
                 }
+              },
+              "ALBServiceAccount": {
+                "id": "ALBServiceAccount",
+                "path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount",
+                "children": {
+                  "ConditionJson": {
+                    "id": "ConditionJson",
+                    "path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/ConditionJson",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/ConditionJson/Resource",
+                        "children": {
+                          "Default": {
+                            "id": "Default",
+                            "path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/ConditionJson/Resource/Default",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.CfnResource",
+                              "version": "2.167.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CustomResource",
+                          "version": "2.167.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnJson",
+                      "version": "2.167.0"
+                    }
+                  },
+                  "Role": {
+                    "id": "Role",
+                    "path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/Role",
+                    "children": {
+                      "ImportRole": {
+                        "id": "ImportRole",
+                        "path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/Role/ImportRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.167.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/Role/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRoleWithWebIdentity",
+                                  "Condition": {
+                                    "StringEquals": {
+                                      "Fn::GetAtt": [
+                                        "StudentAdmissionClusterALBServiceAccountConditionJson7BBF1657",
+                                        "Value"
+                                      ]
+                                    }
+                                  },
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Federated": {
+                                      "Ref": "StudentAdmissionClusterOpenIdConnectProvider12503D71"
+                                    }
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/ElasticLoadBalancingFullAccess"
+                                  ]
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.167.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/Role/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/Role/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "ec2:DescribeAccountAttributes",
+                                        "ec2:DescribeAddresses",
+                                        "ec2:DescribeAvailabilityZones",
+                                        "ec2:DescribeInternetGateways",
+                                        "ec2:DescribeVpcs",
+                                        "ec2:DescribeVpcPeeringConnections",
+                                        "ec2:DescribeSubnets",
+                                        "ec2:DescribeSecurityGroups",
+                                        "ec2:DescribeInstances",
+                                        "ec2:DescribeNetworkInterfaces",
+                                        "ec2:DescribeTags",
+                                        "ec2:GetCoipPoolUsage",
+                                        "ec2:DescribeCoipPools",
+                                        "ec2:CreateSecurityGroup",
+                                        "ec2:CreateTags",
+                                        "ec2:DeleteTags",
+                                        "ec2:AuthorizeSecurityGroupIngress",
+                                        "ec2:RevokeSecurityGroupIngress",
+                                        "ec2:DeleteSecurityGroup",
+                                        "elasticloadbalancing:*"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": "*"
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "StudentAdmissionClusterALBServiceAccountRoleDefaultPolicyE03A73E2",
+                                "roles": [
+                                  {
+                                    "Ref": "StudentAdmissionClusterALBServiceAccountRole467FCE43"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.167.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.167.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.167.0"
+                    }
+                  },
+                  "manifest-ALBServiceAccountServiceAccountResource": {
+                    "id": "manifest-ALBServiceAccountServiceAccountResource",
+                    "path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/manifest-ALBServiceAccountServiceAccountResource",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/manifest-ALBServiceAccountServiceAccountResource/Resource",
+                        "children": {
+                          "Default": {
+                            "id": "Default",
+                            "path": "StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/manifest-ALBServiceAccountServiceAccountResource/Resource/Default",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.CfnResource",
+                              "version": "2.167.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CustomResource",
+                          "version": "2.167.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_eks.KubernetesManifest",
+                      "version": "2.167.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_eks.ServiceAccount",
+                  "version": "2.167.0"
+                }
+              },
+              "OpenIdConnectProvider": {
+                "id": "OpenIdConnectProvider",
+                "path": "StudentAdmissionAppStack/StudentAdmissionCluster/OpenIdConnectProvider",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "StudentAdmissionAppStack/StudentAdmissionCluster/OpenIdConnectProvider/Resource",
+                    "children": {
+                      "Default": {
+                        "id": "Default",
+                        "path": "StudentAdmissionAppStack/StudentAdmissionCluster/OpenIdConnectProvider/Resource/Default",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnResource",
+                          "version": "2.167.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CustomResource",
+                      "version": "2.167.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_eks.OpenIdConnectProvider",
+                  "version": "2.167.0"
+                }
+              },
+              "chart-AWSLoadBalancerController": {
+                "id": "chart-AWSLoadBalancerController",
+                "path": "StudentAdmissionAppStack/StudentAdmissionCluster/chart-AWSLoadBalancerController",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "StudentAdmissionAppStack/StudentAdmissionCluster/chart-AWSLoadBalancerController/Resource",
+                    "children": {
+                      "Default": {
+                        "id": "Default",
+                        "path": "StudentAdmissionAppStack/StudentAdmissionCluster/chart-AWSLoadBalancerController/Resource/Default",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnResource",
+                          "version": "2.167.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CustomResource",
+                      "version": "2.167.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_eks.HelmChart",
+                  "version": "2.167.0"
+                }
               }
             },
             "constructInfo": {
@@ -3218,6 +3467,74 @@
             "constructInfo": {
               "fqn": "constructs.Construct",
               "version": "10.4.2"
+            }
+          },
+          "Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider": {
+            "id": "Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider",
+            "path": "StudentAdmissionAppStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider",
+            "children": {
+              "Staging": {
+                "id": "Staging",
+                "path": "StudentAdmissionAppStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Staging",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.AssetStaging",
+                  "version": "2.167.0"
+                }
+              },
+              "Role": {
+                "id": "Role",
+                "path": "StudentAdmissionAppStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.167.0"
+                }
+              },
+              "Handler": {
+                "id": "Handler",
+                "path": "StudentAdmissionAppStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.167.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CustomResourceProviderBase",
+              "version": "2.167.0"
+            }
+          },
+          "AWSCDKCfnUtilsProviderCustomResourceProvider": {
+            "id": "AWSCDKCfnUtilsProviderCustomResourceProvider",
+            "path": "StudentAdmissionAppStack/AWSCDKCfnUtilsProviderCustomResourceProvider",
+            "children": {
+              "Staging": {
+                "id": "Staging",
+                "path": "StudentAdmissionAppStack/AWSCDKCfnUtilsProviderCustomResourceProvider/Staging",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.AssetStaging",
+                  "version": "2.167.0"
+                }
+              },
+              "Role": {
+                "id": "Role",
+                "path": "StudentAdmissionAppStack/AWSCDKCfnUtilsProviderCustomResourceProvider/Role",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.167.0"
+                }
+              },
+              "Handler": {
+                "id": "Handler",
+                "path": "StudentAdmissionAppStack/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.167.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CustomResourceProviderBase",
+              "version": "2.167.0"
             }
           },
           "GithubActionsUser": {

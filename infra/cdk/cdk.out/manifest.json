@@ -19,7 +19,7 @@
         "notificationArns": [],
         "assumeRoleArn": "arn:${AWS::Partition}:iam::445567082568:role/cdk-hnb659fds-deploy-role-445567082568-ap-southeast-2",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::445567082568:role/cdk-hnb659fds-cfn-exec-role-445567082568-ap-southeast-2",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-445567082568-ap-southeast-2/4fb0867dce58316c2a694d4f764fbcdaa904b48d819a0e93271f933e12f90ae1.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-445567082568-ap-southeast-2/492a618217e262ecbded9374fcf2c50780e510b8c0082eb02c775f95b6aa74f5.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -178,14 +178,14 @@
             "type": "aws:cdk:warning",
             "data": "You created a cluster with Kubernetes Version 1.29 without specifying the kubectlLayer property. This may cause failures as the kubectl version provided with aws-cdk-lib is 1.20, which is only guaranteed to be compatible with Kubernetes versions 1.19-1.21. Please provide a kubectlLayer from @aws-cdk/lambda-layer-kubectl-v29. [ack: @aws-cdk/aws-eks:clusterKubectlLayerNotSpecified]",
             "trace": [
-              "Annotations.addMessage (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-4LWAgO\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:1608)",
-              "Annotations.addWarningV2 (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-4LWAgO\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:825)",
-              "new Cluster (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-4LWAgO\\node_modules\\aws-cdk-lib\\aws-eks\\lib\\cluster.js:1:10102)",
-              "Kernel._Kernel_create (C:\\Users\\asus\\AppData\\Local\\Temp\\tmpk0ewxwdi\\lib\\program.js:9127:25)",
-              "Kernel.create (C:\\Users\\asus\\AppData\\Local\\Temp\\tmpk0ewxwdi\\lib\\program.js:8798:93)",
-              "KernelHost.processRequest (C:\\Users\\asus\\AppData\\Local\\Temp\\tmpk0ewxwdi\\lib\\program.js:10715:36)",
-              "KernelHost.run (C:\\Users\\asus\\AppData\\Local\\Temp\\tmpk0ewxwdi\\lib\\program.js:10675:22)",
-              "Immediate._onImmediate (C:\\Users\\asus\\AppData\\Local\\Temp\\tmpk0ewxwdi\\lib\\program.js:10676:46)",
+              "Annotations.addMessage (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-bIjs3X\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:1608)",
+              "Annotations.addWarningV2 (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-bIjs3X\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:825)",
+              "new Cluster (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-bIjs3X\\node_modules\\aws-cdk-lib\\aws-eks\\lib\\cluster.js:1:10102)",
+              "Kernel._Kernel_create (C:\\Users\\asus\\AppData\\Local\\Temp\\tmplmxka31r\\lib\\program.js:9127:25)",
+              "Kernel.create (C:\\Users\\asus\\AppData\\Local\\Temp\\tmplmxka31r\\lib\\program.js:8798:93)",
+              "KernelHost.processRequest (C:\\Users\\asus\\AppData\\Local\\Temp\\tmplmxka31r\\lib\\program.js:10715:36)",
+              "KernelHost.run (C:\\Users\\asus\\AppData\\Local\\Temp\\tmplmxka31r\\lib\\program.js:10675:22)",
+              "Immediate._onImmediate (C:\\Users\\asus\\AppData\\Local\\Temp\\tmplmxka31r\\lib\\program.js:10676:46)",
               "process.processImmediate (node:internal/timers:476:21)"
             ]
           }
@@ -254,6 +254,42 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "StudentAdmissionClusterAwsAuthmanifest62DCD7E8"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterALBServiceAccountConditionJson7BBF1657"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterALBServiceAccountRole467FCE43"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterALBServiceAccountRoleDefaultPolicyE03A73E2"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/ALBServiceAccount/manifest-ALBServiceAccountServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterALBServiceAccountmanifestALBServiceAccountServiceAccountResource4E7C7375"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/OpenIdConnectProvider/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterOpenIdConnectProvider12503D71"
+          }
+        ],
+        "/StudentAdmissionAppStack/StudentAdmissionCluster/chart-AWSLoadBalancerController/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "StudentAdmissionClusterchartAWSLoadBalancerController3B1AD640"
           }
         ],
         "/StudentAdmissionAppStack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
@@ -488,6 +524,42 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B"
+          }
+        ],
+        "/StudentAdmissionAppStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/StudentAdmissionAppStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+          }
+        ],
+        "/StudentAdmissionAppStack/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0"
+          }
+        ],
+        "/StudentAdmissionAppStack/AWSCDKCfnUtilsProviderCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/StudentAdmissionAppStack/AWSCDKCfnUtilsProviderCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
+          }
+        ],
+        "/StudentAdmissionAppStack/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57"
           }
         ],
         "/StudentAdmissionAppStack/GithubActionsUser/Policy/Resource": [

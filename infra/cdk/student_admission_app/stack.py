@@ -82,7 +82,68 @@ class StudentAdmissionAppStack(Stack):
             ami_type=eks.NodegroupAmiType.AL2_X86_64,
         )
 
-        # ── 6. Allow GitHub Actions IAM user to push to ECR + access EKS ──────
+        # ── 6. IAM Service Account for AWS Load Balancer Controller
+        alb_service_account = cluster.add_service_account(
+            "ALBServiceAccount",
+            name="aws-load-balancer-controller",
+            namespace="kube-system",
+        )
+
+        # Attach required IAM policies for the Load Balancer Controller
+        alb_service_account.role.add_managed_policy(
+            iam.ManagedPolicy.from_aws_managed_policy_name(
+                "ElasticLoadBalancingFullAccess"
+            )
+        )
+
+        # Additional inline policy for EC2/EKS permissions the controller needs
+        alb_service_account.add_to_principal_policy(
+            iam.PolicyStatement(
+                actions=[
+                    "ec2:DescribeAccountAttributes",
+                    "ec2:DescribeAddresses",
+                    "ec2:DescribeAvailabilityZones",
+                    "ec2:DescribeInternetGateways",
+                    "ec2:DescribeVpcs",
+                    "ec2:DescribeVpcPeeringConnections",
+                    "ec2:DescribeSubnets",
+                    "ec2:DescribeSecurityGroups",
+                    "ec2:DescribeInstances",
+                    "ec2:DescribeNetworkInterfaces",
+                    "ec2:DescribeTags",
+                    "ec2:GetCoipPoolUsage",
+                    "ec2:DescribeCoipPools",
+                    "ec2:CreateSecurityGroup",
+                    "ec2:CreateTags",
+                    "ec2:DeleteTags",
+                    "ec2:AuthorizeSecurityGroupIngress",
+                    "ec2:RevokeSecurityGroupIngress",
+                    "ec2:DeleteSecurityGroup",
+                    "elasticloadbalancing:*",
+                ],
+                resources=["*"],
+            )
+        )
+
+        # ── 7. Install AWS Load Balancer Controller via Helm
+        alb_chart = cluster.add_helm_chart(
+            "AWSLoadBalancerController",
+            chart="aws-load-balancer-controller",
+            repository="https://aws.github.io/eks-charts",
+            namespace="kube-system",
+            values={
+                "clusterName": cluster.cluster_name,
+                "serviceAccount": {
+                    "create": False,
+                    "name": "aws-load-balancer-controller",
+                },
+            },
+        )
+
+        # Helm chart must wait for the service account to be ready
+        alb_chart.node.add_dependency(alb_service_account)
+
+        # ── 8. Allow GitHub Actions IAM user to push to ECR + access EKS
         github_actions_user = iam.User.from_user_name(
             self, "GithubActionsUser", os.environ.get("AWS_IAM_USER", "clarilook.aws")
         )
@@ -92,7 +153,7 @@ class StudentAdmissionAppStack(Stack):
             groups=["system:masters"],
         )
 
-        # ── 7. Outputs
+        # ── 9. Outputs
         CfnOutput(self, "VpcId",
             value=vpc.vpc_id,
             description="VPC ID"
