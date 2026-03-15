@@ -3,7 +3,7 @@ kind: ClusterConfig
 
 metadata:
   name: student-admission-app-cluster
-  region: ap-southeast-2   # Sydney — change if needed
+  region: ap-southeast-2
   version: "1.29"
 
 # Managed node group
@@ -17,7 +17,7 @@ managedNodeGroups:
     labels:
       app: student-admission-app
     tags:
-      Project: EduApply
+      Project: TextonCollege
       Environment: demo
 
 # Enable CloudWatch logging
