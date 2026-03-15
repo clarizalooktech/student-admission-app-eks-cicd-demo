@@ -178,14 +178,14 @@
             "type": "aws:cdk:warning",
             "data": "You created a cluster with Kubernetes Version 1.29 without specifying the kubectlLayer property. This may cause failures as the kubectl version provided with aws-cdk-lib is 1.20, which is only guaranteed to be compatible with Kubernetes versions 1.19-1.21. Please provide a kubectlLayer from @aws-cdk/lambda-layer-kubectl-v29. [ack: @aws-cdk/aws-eks:clusterKubectlLayerNotSpecified]",
             "trace": [
-              "Annotations.addMessage (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-bIjs3X\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:1608)",
-              "Annotations.addWarningV2 (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-bIjs3X\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:825)",
-              "new Cluster (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-bIjs3X\\node_modules\\aws-cdk-lib\\aws-eks\\lib\\cluster.js:1:10102)",
-              "Kernel._Kernel_create (C:\\Users\\asus\\AppData\\Local\\Temp\\tmplmxka31r\\lib\\program.js:9127:25)",
-              "Kernel.create (C:\\Users\\asus\\AppData\\Local\\Temp\\tmplmxka31r\\lib\\program.js:8798:93)",
-              "KernelHost.processRequest (C:\\Users\\asus\\AppData\\Local\\Temp\\tmplmxka31r\\lib\\program.js:10715:36)",
-              "KernelHost.run (C:\\Users\\asus\\AppData\\Local\\Temp\\tmplmxka31r\\lib\\program.js:10675:22)",
-              "Immediate._onImmediate (C:\\Users\\asus\\AppData\\Local\\Temp\\tmplmxka31r\\lib\\program.js:10676:46)",
+              "Annotations.addMessage (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-jFRzt3\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:1608)",
+              "Annotations.addWarningV2 (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-jFRzt3\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:825)",
+              "new Cluster (C:\\Users\\asus\\AppData\\Local\\Temp\\jsii-kernel-jFRzt3\\node_modules\\aws-cdk-lib\\aws-eks\\lib\\cluster.js:1:10102)",
+              "Kernel._Kernel_create (C:\\Users\\asus\\AppData\\Local\\Temp\\tmpi7n_c3vk\\lib\\program.js:9127:25)",
+              "Kernel.create (C:\\Users\\asus\\AppData\\Local\\Temp\\tmpi7n_c3vk\\lib\\program.js:8798:93)",
+              "KernelHost.processRequest (C:\\Users\\asus\\AppData\\Local\\Temp\\tmpi7n_c3vk\\lib\\program.js:10715:36)",
+              "KernelHost.run (C:\\Users\\asus\\AppData\\Local\\Temp\\tmpi7n_c3vk\\lib\\program.js:10675:22)",
+              "Immediate._onImmediate (C:\\Users\\asus\\AppData\\Local\\Temp\\tmpi7n_c3vk\\lib\\program.js:10676:46)",
               "process.processImmediate (node:internal/timers:476:21)"
             ]
           }
