@@ -10,13 +10,15 @@ sleep 60
 
 # Verify ELBs are gone
 echo "Checking for remaining ELBs..."
-aws elb describe-load-balancers --region ap-southeast-2 \
-  --query 'LoadBalancerDescriptions[*].[LoadBalancerName,VPCId]' \
+# Find the NLB
+aws elbv2 describe-load-balancers --region ap-southeast-2 \
+  --query 'LoadBalancers[*].[LoadBalancerName,LoadBalancerArn]' \
   --output table
 
-aws elbv2 describe-load-balancers --region ap-southeast-2 \
-  --query 'LoadBalancers[*].[LoadBalancerName,State.Code]' \
-  --output table
+# Delete it
+aws elbv2 delete-load-balancer \
+  --load-balancer-arn <arn-from-above> \
+  --region ap-southeast-2
 
 echo "Running cdk destroy..."
 cdk destroy --force
